@@ -1,6 +1,3 @@
-pub mod todo_item;
-pub mod todo_list;
-
 pub enum Command {
     Get,
     Add(String),
