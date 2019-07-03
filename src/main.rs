@@ -10,6 +10,7 @@ fn main() {
         "get" => Command::Get,
         "add" => Command::Add(arguments[2].clone()),
         "done" => Command::Done(arguments[2].clone()),
+        "delete" => Command::Delete(arguments[2].clone()),
         _ => panic!("You must provide an accepted command")
     };
 
@@ -26,5 +27,10 @@ fn main() {
             todo_list.set_done(pos_int - 1);
             todo_list.print();
         },
+        Command::Delete(position) => {
+            let pos_int = position.parse::<usize>().unwrap();
+            todo_list.delete(pos_int);
+            todo_list.print();
+        }
     }
 }

@@ -2,6 +2,7 @@ pub enum Command {
     Get,
     Add(String),
     Done(String),
+    Delete(String),
 }
 
 #[derive(Debug)]
@@ -44,5 +45,9 @@ impl TodoList {
             Some(task) => task.done = 'x',
             None => println!("Task not found.")
         }
+    }
+
+    pub fn delete(&mut self, position: usize) {
+        self.list.remove(position);
     }
 }
