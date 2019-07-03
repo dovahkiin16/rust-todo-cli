@@ -34,7 +34,7 @@ impl TodoList {
         self.list.push(TodoItem::new(title));
     }
 
-    pub fn print(self) {
+    pub fn print(&self) {
         for (index, item) in self.list.iter().enumerate() {
             println!("[{}] - {}. {}", item.done, (index+1), item.title);
         }
