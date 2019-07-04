@@ -30,3 +30,79 @@ pub fn extract_command(args: &Vec<String>) -> Command {
         _ => panic!("You must provide an accepted command")
     }
 }
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn extract_get_command() {
+        let command = extract_command(&vec!["".to_string(), "get".to_string()]);
+
+        match command {
+            Command::Get => {},
+            _ => panic!("Failed to extract get command")
+        }
+    }
+
+    #[test]
+    fn extract_add_command_with_task() {
+        let args = vec!["".to_string(), "add".to_string(), "test".to_string()];
+        let command = extract_command(&args);
+
+        match command {
+            Command::Add(task) => assert_eq!("test", task),
+            _ => panic!("Failed to extract add command")
+        }
+    }
+
+    #[test]
+    #[should_panic]
+    fn extract_add_command_without_task() {
+        let args = vec!["".to_string(), "add".to_string()];
+        let _command = extract_command(&args);
+    }
+
+    #[test]
+    fn extract_done_command_with_task() {
+        let args = vec!["".to_string(), "done".to_string(), "task".to_string()];
+        let command = extract_command(&args);
+
+        match command {
+            Command::Done(task) => assert_eq!("task", task),
+            _ => panic!("Failed to extract done command")
+        }
+    }
+
+    #[test]
+    #[should_panic]
+    fn extract_done_command_without_task() {
+        let args = vec!["".to_string(), "done".to_string()];
+        let _command = extract_command(&args);
+    }
+
+    #[test]
+    fn extract_delete_command_with_task() {
+        let args = vec!["".to_string(), "delete".to_string(), "task".to_string()];
+        let command = extract_command(&args);
+
+        match command {
+            Command::Delete(task) => assert_eq!("task", task),
+            _ => panic!("Failed to extract delete task")
+        }
+    }
+
+    #[test]
+    #[should_panic]
+    fn extract_delete_command_without_task() {
+        let args = vec!["".to_string(), "delete".to_string()];
+        let _command = extract_command(&args);
+    }
+
+    #[test]
+    #[should_panic]
+    fn extract_unknown_command() {
+        let args = vec!["".to_string(), "unknown".to_string()];
+        let _command = extract_command(&args);
+    }
+}
