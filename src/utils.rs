@@ -62,8 +62,8 @@ mod tests {
     }
 
     #[test]
-    fn extract_done_command_with_task() {
-        let args = vec!["".to_string(), "done".to_string(), "task".to_string()];
+    fn extract_done_command_with_position() {
+        let args = vec!["".to_string(), "done".to_string(), "1".to_string()];
         let command = extract_command(&args);
 
         match command {
@@ -74,14 +74,14 @@ mod tests {
 
     #[test]
     #[should_panic]
-    fn extract_done_command_without_task() {
+    fn extract_done_command_without_position() {
         let args = vec!["".to_string(), "done".to_string()];
         let _command = extract_command(&args);
     }
 
     #[test]
-    fn extract_delete_command_with_task() {
-        let args = vec!["".to_string(), "delete".to_string(), "task".to_string()];
+    fn extract_delete_command_with_position() {
+        let args = vec!["".to_string(), "delete".to_string(), "1".to_string()];
         let command = extract_command(&args);
 
         match command {
@@ -92,7 +92,7 @@ mod tests {
 
     #[test]
     #[should_panic]
-    fn extract_delete_command_without_task() {
+    fn extract_delete_command_without_position() {
         let args = vec!["".to_string(), "delete".to_string()];
         let _command = extract_command(&args);
     }
