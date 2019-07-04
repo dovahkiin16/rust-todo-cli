@@ -9,13 +9,11 @@ pub fn exec_command(command: &Command, todo_list: &mut TodoList) {
             todo_list.print();
         }
         Command::Done(position) => {
-            let pos_int = position.parse::<usize>().expect("Invalid task position");
-            todo_list.set_done(pos_int - 1);
+            todo_list.set_done(position - 1);
             todo_list.print();
         }
         Command::Delete(position) => {
-            let pos_int = position.parse::<usize>().expect("Invalid task position");
-            todo_list.delete(pos_int - 1);
+            todo_list.delete(position - 1);
             todo_list.print();
         }
     };
@@ -25,8 +23,8 @@ pub fn extract_command(args: &Vec<String>) -> Command {
     match args[1].as_str() {
         "get" => Command::Get,
         "add" => Command::Add(args[2].clone()),
-        "done" => Command::Done(args[2].clone()),
-        "delete" => Command::Delete(args[2].clone()),
+        "done" => Command::Done(args[2].clone().parse().expect("Expected position to be number")),
+        "delete" => Command::Delete(args[2].clone().parse().expect("Expected position to be number")),
         _ => panic!("You must provide an accepted command")
     }
 }
@@ -40,7 +38,7 @@ mod tests {
         let command = extract_command(&vec!["".to_string(), "get".to_string()]);
 
         match command {
-            Command::Get => {},
+            Command::Get => {}
             _ => panic!("Failed to extract get command")
         }
     }

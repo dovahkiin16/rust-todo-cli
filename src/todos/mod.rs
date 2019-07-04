@@ -1,8 +1,8 @@
 pub enum Command {
     Get,
     Add(String),
-    Done(String),
-    Delete(String),
+    Done(usize),
+    Delete(usize),
 }
 
 #[derive(Debug)]
