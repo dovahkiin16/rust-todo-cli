@@ -18,6 +18,10 @@ impl TodoItem {
             done: ' ',
         };
     }
+
+    pub fn set_done(&mut self) {
+        self.done = 'x';
+    }
 }
 
 #[derive(Debug)]
@@ -42,7 +46,7 @@ impl TodoList {
 
     pub fn set_done(&mut self, position: usize) {
         match self.list.get_mut(position) {
-            Some(task) => task.done = 'x',
+            Some(task) => task.set_done(),
             None => println!("Task not found.")
         }
     }
