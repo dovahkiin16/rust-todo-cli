@@ -67,7 +67,7 @@ mod tests {
         let command = extract_command(&args);
 
         match command {
-            Command::Done(task) => assert_eq!("task", task),
+            Command::Done(task) => assert_eq!(1, task),
             _ => panic!("Failed to extract done command")
         }
     }
@@ -85,7 +85,7 @@ mod tests {
         let command = extract_command(&args);
 
         match command {
-            Command::Delete(task) => assert_eq!("task", task),
+            Command::Delete(task) => assert_eq!(1, task),
             _ => panic!("Failed to extract delete task")
         }
     }

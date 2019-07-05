@@ -18,6 +18,10 @@ impl TodoItem {
             done: ' ',
         };
     }
+
+    pub fn set_done(&mut self) {
+        self.done = 'x';
+    }
 }
 
 #[derive(Debug)]
@@ -42,12 +46,27 @@ impl TodoList {
 
     pub fn set_done(&mut self, position: usize) {
         match self.list.get_mut(position) {
-            Some(task) => task.done = 'x',
+            Some(task) => task.set_done(),
             None => println!("Task not found.")
         }
     }
 
     pub fn delete(&mut self, position: usize) {
         self.list.remove(position);
+    }
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn set_task_to_done() {
+        let mut list = TodoList::new();
+
+        list.add_to_list("Testing".to_string());
+        list.set_done(0);
+
+        assert_eq!(list.list.pop().unwrap().done, 'x');
     }
 }
