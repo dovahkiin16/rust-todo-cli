@@ -55,3 +55,18 @@ impl TodoList {
         self.list.remove(position);
     }
 }
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn set_task_to_done() {
+        let mut list = TodoList::new();
+
+        list.add_to_list("Testing".to_string());
+        list.set_done(0);
+
+        assert_eq!(list.list.pop().unwrap().done, 'x');
+    }
+}
